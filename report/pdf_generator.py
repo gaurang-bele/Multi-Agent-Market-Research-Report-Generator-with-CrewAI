@@ -520,7 +520,7 @@ def compile_report(
     _fix_page_total(output_path, doc._total_pages)
 
     abs_path = os.path.abspath(output_path)
-    print(f"\n✅ PDF report compiled successfully → {abs_path}")
+    print(f"\n[OK] PDF report compiled successfully -> {abs_path}")
     return abs_path
 
 

@@ -1,4 +1,4 @@
-"""
+﻿"""
 main.py
 
 CLI entrypoint for the Multi-Agent Market Research & Report Generator.
@@ -33,15 +33,15 @@ from crew import MarketResearchCrew
 from report import compile_report
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Argument Parser
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog="market_research",
         description=(
-            "Multi-Agent Market Research & Report Generator — "
+            "Multi-Agent Market Research & Report Generator â€” "
             "Powered by CrewAI + GPT-4o"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -79,9 +79,9 @@ Examples:
     return parser.parse_args()
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Environment Validation
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def _validate_env() -> None:
     """Fail early with a clear error if required API keys are missing."""
@@ -92,16 +92,16 @@ def _validate_env() -> None:
         missing.append("TAVILY_API_KEY (or SERPER_API_KEY)")
 
     if missing:
-        print("\n❌  Missing required environment variables:")
+        print("\nâŒ  Missing required environment variables:")
         for key in missing:
-            print(f"    • {key}")
+            print(f"    â€¢ {key}")
         print("\nCreate a .env file from .env.example and fill in your API keys.")
         sys.exit(1)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Benchmarks Writer
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def _write_benchmarks(
     benchmark_log: list[dict],
@@ -128,12 +128,12 @@ def _write_benchmarks(
     with open(benchmarks_file, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2)
 
-    print(f"\n📊 Benchmarks written → {os.path.abspath(benchmarks_file)}")
+    print(f"\nðŸ“Š Benchmarks written â†’ {os.path.abspath(benchmarks_file)}")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Optional CSV → Pandas Stats
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# Optional CSV â†’ Pandas Stats
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def _load_stats_df(csv_path: str | None) -> pd.DataFrame | None:
     """Load a CSV and return its numeric describe() DataFrame, or None."""
@@ -152,27 +152,27 @@ def _load_stats_df(csv_path: str | None) -> pd.DataFrame | None:
             return None
         return numeric_df.describe().round(2)
     except Exception as exc:
-        print(f"⚠️  Could not load CSV for stats table: {exc}")
+        print(f"âš ï¸  Could not load CSV for stats table: {exc}")
         return None
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Main
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def main() -> None:
     args = _parse_args()
 
     print("\n" + "=" * 60)
     print("  Multi-Agent Market Research & Report Generator")
-    print("  CrewAI · GPT-4o Manager · Hierarchical Process")
+    print("  CrewAI Â· GPT-4o Manager Â· Hierarchical Process")
     print("=" * 60)
 
     # Validate environment before spending time
     _validate_env()
 
-    # ── Run CrewAI Pipeline ─────────────────────────────────────────────────
-    print(f"\n🚀 Initialising CrewAI pipeline for query: '{args.query}'")
+    # â”€â”€ Run CrewAI Pipeline â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    print(f"\nðŸš€ Initialising CrewAI pipeline for query: '{args.query}'")
     crew = MarketResearchCrew(query=args.query)
 
     pipeline_start = time.perf_counter()
@@ -180,19 +180,19 @@ def main() -> None:
     pipeline_elapsed = time.perf_counter() - pipeline_start
 
     markdown_output: str = result.raw if hasattr(result, "raw") else str(result)
-    print(f"\n✅ CrewAI pipeline completed in {pipeline_elapsed:.1f}s")
+    print(f"\nâœ… CrewAI pipeline completed in {pipeline_elapsed:.1f}s")
 
-    # ── Save raw Markdown ───────────────────────────────────────────────────
+    # â”€â”€ Save raw Markdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     os.makedirs("output", exist_ok=True)
     md_path = Path(args.output).with_suffix(".md")
     md_path.write_text(markdown_output, encoding="utf-8")
-    print(f"📝 Markdown report saved → {md_path.resolve()}")
+    print(f"ðŸ“ Markdown report saved â†’ {md_path.resolve()}")
 
-    # ── Load stats DataFrame for PDF appendix ──────────────────────────────
+    # â”€â”€ Load stats DataFrame for PDF appendix â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     stats_df = _load_stats_df(args.csv)
 
-    # ── Compile PDF ─────────────────────────────────────────────────────────
-    print(f"\n📄 Compiling PDF report → {args.output}")
+    # â”€â”€ Compile PDF â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    print(f"\nðŸ“„ Compiling PDF report â†’ {args.output}")
     pdf_path = compile_report(
         markdown_text=markdown_output,
         query=args.query,
@@ -200,7 +200,7 @@ def main() -> None:
         output_path=args.output,
     )
 
-    # ── Write Benchmarks ────────────────────────────────────────────────────
+    # â”€â”€ Write Benchmarks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     _write_benchmarks(
         benchmark_log=crew.benchmark_log,
         query=args.query,
@@ -209,9 +209,9 @@ def main() -> None:
         benchmarks_file=args.benchmarks,
     )
 
-    # ── Final Summary ───────────────────────────────────────────────────────
+    # â”€â”€ Final Summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     print("\n" + "=" * 60)
-    print("  ✅  Run Complete!")
+    print("  âœ…  Run Complete!")
     print(f"  PDF Report  : {pdf_path}")
     print(f"  Markdown    : {md_path.resolve()}")
     print(f"  Benchmarks  : {os.path.abspath(args.benchmarks)}")
@@ -221,3 +221,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
